@@ -1,0 +1,5 @@
+
+# Exclude oversized Blender source files
+scenes/*.blend
+scenes/*.blend1
+

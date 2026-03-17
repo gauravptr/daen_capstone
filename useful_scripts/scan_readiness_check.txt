@@ -1,0 +1,134 @@
+import bpy
+
+print("=" * 60)
+print("       OBJECT SCANNER READINESS CHECK")
+print("=" * 60)
+
+# ============================================================
+# CONFIGURATION
+# ============================================================
+
+# Objects to ignore (scanner output, paths, etc.)
+IGNORE_PREFIXES = [
+    "real_values",
+    "noise_values", 
+    "ScanPath",
+    "PathMarker",
+    "Camera",
+    "Light",
+]
+
+# ============================================================
+# STEP 1: Inventory all objects
+# ============================================================
+print("\n📋 STEP 1: Scanning scene for objects...")
+
+all_objects = []
+ignored_objects = []
+scannable_objects = []
+
+for obj in bpy.data.objects:
+    # Check if should be ignored
+    should_ignore = False
+    for prefix in IGNORE_PREFIXES:
+        if obj.name.startswith(prefix):
+            should_ignore = True
+            break
+    
+    if should_ignore:
+        ignored_objects.append(obj)
+    elif obj.type in ['CAMERA', 'LIGHT', 'EMPTY', 'ARMATURE']:
+        ignored_objects.append(obj)
+    else:
+        all_objects.append(obj)
+
+print(f"   Total objects in scene: {len(bpy.data.objects)}")
+print(f"   Ignored (cameras, lights, scan results): {len(ignored_objects)}")
+print(f"   Objects to check: {len(all_objects)}")
+
+# ============================================================
+# STEP 2: Check each object
+# ============================================================
+print("\n📋 STEP 2: Checking objects...")
+
+issues = {
+    'no_material': [],
+    'not_mesh': [],
+    'hidden_viewport': [],
+    'hidden_render': [],
+    'empty_material_slot': [],
+}
+
+ready_objects = []
+
+for obj in all_objects:
+    obj_issues = []
+    
+    # Check if it's a mesh
+    if obj.type != 'MESH':
+        issues['not_mesh'].append(obj)
+        obj_issues.append(f"Type is {obj.type}, not MESH")
+    
+    # Check visibility
+    if obj.hide_viewport:
+        issues['hidden_viewport'].append(obj)
+        obj_issues.append("Hidden in viewport")
+    
+    if obj.hide_render:
+        issues['hidden_render'].append(obj)
+        obj_issues.append("Hidden for render")
+    
+    # Check materials (only for mesh objects)
+    if obj.type == 'MESH':
+        if len(obj.material_slots) == 0:
+            issues['no_material'].append(obj)
+            obj_issues.append("No material assigned")
+        else:
+            # Check for empty material slots
+            has_valid_material = False
+            for slot in obj.material_slots:
+                if slot.material:
+                    has_valid_material = True
+                else:
+                    if obj not in issues['empty_material_slot']:
+                        issues['empty_material_slot'].append(obj)
+                    obj_issues.append("Empty material slot")
+            
+            if not has_valid_material:
+                issues['no_material'].append(obj)
+                obj_issues.append("No valid material")
+    
+    # Print status
+    if obj_issues:
+        print(f"\n   ⚠️  {obj.name} ({obj.type})")
+        for issue in obj_issues:
+            print(f"       - {issue}")
+    else:
+        ready_objects.append(obj)
+
+# ============================================================
+# STEP 3: Summary
+# ============================================================
+print("\n" + "=" * 60)
+print("       SUMMARY")
+print("=" * 60)
+
+print(f"\n✅ Ready for scanning: {len(ready_objects)}")
+for obj in ready_objects:
+    mat_count = len(obj.material_slots) if obj.type == 'MESH' else 0
+    print(f"   ✅ {obj.name} ({mat_count} materials)")
+
+print(f"\n⚠️  Issues found:")
+print(f"   - No material: {len(issues['no_material'])}")
+print(f"   - Not a mesh: {len(issues['not_mesh'])}")
+print(f"   - Hidden viewport: {len(issues['hidden_viewport'])}")
+print(f"   - Hidden render: {len(issues['hidden_render'])}")
+print(f"   - Empty material slot: {len(issues['empty_material_slot'])}")
+
+total_issues = sum(len(v) for v in issues.values())
+
+if total_issues > 0:
+    print(f"\n❌ {total_issues} issues need to be fixed!")
+    print("   Run the FIX script below to resolve them.")
+else:
+    print(f"\n✅ All objects are ready for scanning!")
