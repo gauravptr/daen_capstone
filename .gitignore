@@ -3,3 +3,7 @@
 scenes/*.blend
 scenes/*.blend1
 
+
+# Ignore local project documents
+documents and stuf/
+
