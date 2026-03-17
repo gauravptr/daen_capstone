@@ -1,7 +1,7 @@
 
 # Exclude oversized Blender source files
-scenes/*.blend
-scenes/*.blend1
+# scenes/*.blend
+# scenes/*.blend1
 
 
 # Ignore local project documents
