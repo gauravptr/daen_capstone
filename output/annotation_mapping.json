@@ -1,0 +1,620 @@
+{
+  "collection_class_map": {
+    "Anomalies": {
+      "class_id": 1,
+      "class_name": "anomaly",
+      "is_anomaly": true
+    },
+    "Rocks": {
+      "class_id": 2,
+      "class_name": "rock",
+      "is_anomaly": false
+    },
+    "Coral": {
+      "class_id": 3,
+      "class_name": "coral",
+      "is_anomaly": false
+    },
+    "Wildlife": {
+      "class_id": 4,
+      "class_name": "wildlife",
+      "is_anomaly": false
+    },
+    "Seafloor": {
+      "class_id": 0,
+      "class_name": "seafloor",
+      "is_anomaly": false
+    }
+  },
+  "material_to_class": {
+    "02_coral": {
+      "class_id": 3,
+      "class_name": "coral",
+      "is_anomaly": false,
+      "objects": [
+        "10010_Coral_v1_L3",
+        "10010_Coral_v1_L3.001",
+        "10010_Coral_v1_L3.002",
+        "10010_Coral_v1_L3.003",
+        "10010_Coral_v1_L3.004",
+        "10010_Coral_v1_L3.005",
+        "10010_Coral_v1_L3.006",
+        "10010_Coral_v1_L3.007",
+        "10010_Coral_v1_L3.008"
+      ]
+    },
+    "04_wildlife": {
+      "class_id": 4,
+      "class_name": "wildlife",
+      "is_anomaly": false,
+      "objects": [
+        "10042_Sea_Turtle_V2_iterations-2"
+      ]
+    },
+    "01_anomaly": {
+      "class_id": 1,
+      "class_name": "anomaly",
+      "is_anomaly": true,
+      "objects": [
+        "Cube",
+        "Cube.001",
+        "Cube.002",
+        "Cube.003",
+        "Cube.004",
+        "Cube.005",
+        "Cube.006",
+        "Mball.001",
+        "Mball.002",
+        "tekne"
+      ]
+    },
+    "default": {
+      "class_id": 0,
+      "class_name": "seafloor",
+      "is_anomaly": false,
+      "objects": [
+        "Mesh_0"
+      ]
+    },
+    "default.001": {
+      "class_id": 0,
+      "class_name": "seafloor",
+      "is_anomaly": false,
+      "objects": [
+        "Mesh_0.001"
+      ]
+    },
+    "default.002": {
+      "class_id": 0,
+      "class_name": "seafloor",
+      "is_anomaly": false,
+      "objects": [
+        "Mesh_0.002"
+      ]
+    },
+    "default.003": {
+      "class_id": 0,
+      "class_name": "seafloor",
+      "is_anomaly": false,
+      "objects": [
+        "Mesh_0.003"
+      ]
+    },
+    "default.004": {
+      "class_id": 0,
+      "class_name": "seafloor",
+      "is_anomaly": false,
+      "objects": [
+        "Mesh_0.004"
+      ]
+    },
+    "default.005": {
+      "class_id": 0,
+      "class_name": "seafloor",
+      "is_anomaly": false,
+      "objects": [
+        "Mesh_0.005"
+      ]
+    },
+    "default.006": {
+      "class_id": 0,
+      "class_name": "seafloor",
+      "is_anomaly": false,
+      "objects": [
+        "Mesh_0.006"
+      ]
+    },
+    "default.007": {
+      "class_id": 0,
+      "class_name": "seafloor",
+      "is_anomaly": false,
+      "objects": [
+        "Mesh_0.007"
+      ]
+    },
+    "default.008": {
+      "class_id": 0,
+      "class_name": "seafloor",
+      "is_anomaly": false,
+      "objects": [
+        "Mesh_0.008"
+      ]
+    },
+    "default.009": {
+      "class_id": 0,
+      "class_name": "seafloor",
+      "is_anomaly": false,
+      "objects": [
+        "Mesh_0.009"
+      ]
+    },
+    "default.010": {
+      "class_id": 0,
+      "class_name": "seafloor",
+      "is_anomaly": false,
+      "objects": [
+        "Mesh_0.010"
+      ]
+    },
+    "00_seafloor": {
+      "class_id": 0,
+      "class_name": "seafloor",
+      "is_anomaly": false,
+      "objects": [
+        "Plane"
+      ]
+    },
+    "03_rock": {
+      "class_id": 2,
+      "class_name": "rock",
+      "is_anomaly": false,
+      "objects": [
+        "Rock0",
+        "Rock3",
+        "Rock6"
+      ]
+    },
+    "SonarPathMaterial.001": {
+      "class_id": 0,
+      "class_name": "seafloor",
+      "is_anomaly": false,
+      "objects": [
+        "SonarPath"
+      ]
+    }
+  },
+  "object_mapping": {
+    "10010_Coral_v1_L3": {
+      "name": "10010_Coral_v1_L3",
+      "materials": [
+        "02_coral"
+      ],
+      "collections": [
+        "Coral"
+      ],
+      "class_id": 3,
+      "class_name": "coral",
+      "is_anomaly": false
+    },
+    "10010_Coral_v1_L3.001": {
+      "name": "10010_Coral_v1_L3.001",
+      "materials": [
+        "02_coral"
+      ],
+      "collections": [
+        "Coral"
+      ],
+      "class_id": 3,
+      "class_name": "coral",
+      "is_anomaly": false
+    },
+    "10010_Coral_v1_L3.002": {
+      "name": "10010_Coral_v1_L3.002",
+      "materials": [
+        "02_coral"
+      ],
+      "collections": [
+        "Coral"
+      ],
+      "class_id": 3,
+      "class_name": "coral",
+      "is_anomaly": false
+    },
+    "10010_Coral_v1_L3.003": {
+      "name": "10010_Coral_v1_L3.003",
+      "materials": [
+        "02_coral"
+      ],
+      "collections": [
+        "Coral"
+      ],
+      "class_id": 3,
+      "class_name": "coral",
+      "is_anomaly": false
+    },
+    "10010_Coral_v1_L3.004": {
+      "name": "10010_Coral_v1_L3.004",
+      "materials": [
+        "02_coral"
+      ],
+      "collections": [
+        "Coral"
+      ],
+      "class_id": 3,
+      "class_name": "coral",
+      "is_anomaly": false
+    },
+    "10010_Coral_v1_L3.005": {
+      "name": "10010_Coral_v1_L3.005",
+      "materials": [
+        "02_coral"
+      ],
+      "collections": [
+        "Coral"
+      ],
+      "class_id": 3,
+      "class_name": "coral",
+      "is_anomaly": false
+    },
+    "10010_Coral_v1_L3.006": {
+      "name": "10010_Coral_v1_L3.006",
+      "materials": [
+        "02_coral"
+      ],
+      "collections": [
+        "Coral"
+      ],
+      "class_id": 3,
+      "class_name": "coral",
+      "is_anomaly": false
+    },
+    "10010_Coral_v1_L3.007": {
+      "name": "10010_Coral_v1_L3.007",
+      "materials": [
+        "02_coral"
+      ],
+      "collections": [
+        "Coral"
+      ],
+      "class_id": 3,
+      "class_name": "coral",
+      "is_anomaly": false
+    },
+    "10010_Coral_v1_L3.008": {
+      "name": "10010_Coral_v1_L3.008",
+      "materials": [
+        "02_coral"
+      ],
+      "collections": [
+        "Coral"
+      ],
+      "class_id": 3,
+      "class_name": "coral",
+      "is_anomaly": false
+    },
+    "10042_Sea_Turtle_V2_iterations-2": {
+      "name": "10042_Sea_Turtle_V2_iterations-2",
+      "materials": [
+        "04_wildlife"
+      ],
+      "collections": [
+        "Wildlife"
+      ],
+      "class_id": 4,
+      "class_name": "wildlife",
+      "is_anomaly": false
+    },
+    "Cube": {
+      "name": "Cube",
+      "materials": [
+        "01_anomaly"
+      ],
+      "collections": [
+        "Anomalies"
+      ],
+      "class_id": 1,
+      "class_name": "anomaly",
+      "is_anomaly": true
+    },
+    "Cube.001": {
+      "name": "Cube.001",
+      "materials": [
+        "01_anomaly"
+      ],
+      "collections": [
+        "Anomalies"
+      ],
+      "class_id": 1,
+      "class_name": "anomaly",
+      "is_anomaly": true
+    },
+    "Cube.002": {
+      "name": "Cube.002",
+      "materials": [
+        "01_anomaly"
+      ],
+      "collections": [
+        "Anomalies"
+      ],
+      "class_id": 1,
+      "class_name": "anomaly",
+      "is_anomaly": true
+    },
+    "Cube.003": {
+      "name": "Cube.003",
+      "materials": [
+        "01_anomaly"
+      ],
+      "collections": [
+        "Anomalies"
+      ],
+      "class_id": 1,
+      "class_name": "anomaly",
+      "is_anomaly": true
+    },
+    "Cube.004": {
+      "name": "Cube.004",
+      "materials": [
+        "01_anomaly"
+      ],
+      "collections": [
+        "Anomalies"
+      ],
+      "class_id": 1,
+      "class_name": "anomaly",
+      "is_anomaly": true
+    },
+    "Cube.005": {
+      "name": "Cube.005",
+      "materials": [
+        "01_anomaly"
+      ],
+      "collections": [
+        "Anomalies"
+      ],
+      "class_id": 1,
+      "class_name": "anomaly",
+      "is_anomaly": true
+    },
+    "Cube.006": {
+      "name": "Cube.006",
+      "materials": [
+        "01_anomaly"
+      ],
+      "collections": [
+        "Anomalies"
+      ],
+      "class_id": 1,
+      "class_name": "anomaly",
+      "is_anomaly": true
+    },
+    "Mball.001": {
+      "name": "Mball.001",
+      "materials": [
+        "01_anomaly"
+      ],
+      "collections": [
+        "Anomalies"
+      ],
+      "class_id": 1,
+      "class_name": "anomaly",
+      "is_anomaly": true
+    },
+    "Mball.002": {
+      "name": "Mball.002",
+      "materials": [
+        "01_anomaly"
+      ],
+      "collections": [
+        "Anomalies"
+      ],
+      "class_id": 1,
+      "class_name": "anomaly",
+      "is_anomaly": true
+    },
+    "Mesh_0": {
+      "name": "Mesh_0",
+      "materials": [
+        "default"
+      ],
+      "collections": [
+        "Collection 3"
+      ],
+      "class_id": 0,
+      "class_name": "seafloor",
+      "is_anomaly": false
+    },
+    "Mesh_0.001": {
+      "name": "Mesh_0.001",
+      "materials": [
+        "default.001"
+      ],
+      "collections": [
+        "Collection 3"
+      ],
+      "class_id": 0,
+      "class_name": "seafloor",
+      "is_anomaly": false
+    },
+    "Mesh_0.002": {
+      "name": "Mesh_0.002",
+      "materials": [
+        "default.002"
+      ],
+      "collections": [
+        "Collection 3"
+      ],
+      "class_id": 0,
+      "class_name": "seafloor",
+      "is_anomaly": false
+    },
+    "Mesh_0.003": {
+      "name": "Mesh_0.003",
+      "materials": [
+        "default.003"
+      ],
+      "collections": [
+        "Collection 3"
+      ],
+      "class_id": 0,
+      "class_name": "seafloor",
+      "is_anomaly": false
+    },
+    "Mesh_0.004": {
+      "name": "Mesh_0.004",
+      "materials": [
+        "default.004"
+      ],
+      "collections": [
+        "Collection 3"
+      ],
+      "class_id": 0,
+      "class_name": "seafloor",
+      "is_anomaly": false
+    },
+    "Mesh_0.005": {
+      "name": "Mesh_0.005",
+      "materials": [
+        "default.005"
+      ],
+      "collections": [
+        "Collection 3"
+      ],
+      "class_id": 0,
+      "class_name": "seafloor",
+      "is_anomaly": false
+    },
+    "Mesh_0.006": {
+      "name": "Mesh_0.006",
+      "materials": [
+        "default.006"
+      ],
+      "collections": [
+        "Collection 3"
+      ],
+      "class_id": 0,
+      "class_name": "seafloor",
+      "is_anomaly": false
+    },
+    "Mesh_0.007": {
+      "name": "Mesh_0.007",
+      "materials": [
+        "default.007"
+      ],
+      "collections": [
+        "Collection 3"
+      ],
+      "class_id": 0,
+      "class_name": "seafloor",
+      "is_anomaly": false
+    },
+    "Mesh_0.008": {
+      "name": "Mesh_0.008",
+      "materials": [
+        "default.008"
+      ],
+      "collections": [
+        "Collection 3"
+      ],
+      "class_id": 0,
+      "class_name": "seafloor",
+      "is_anomaly": false
+    },
+    "Mesh_0.009": {
+      "name": "Mesh_0.009",
+      "materials": [
+        "default.009"
+      ],
+      "collections": [
+        "Collection 3"
+      ],
+      "class_id": 0,
+      "class_name": "seafloor",
+      "is_anomaly": false
+    },
+    "Mesh_0.010": {
+      "name": "Mesh_0.010",
+      "materials": [
+        "default.010"
+      ],
+      "collections": [
+        "Collection 3"
+      ],
+      "class_id": 0,
+      "class_name": "seafloor",
+      "is_anomaly": false
+    },
+    "Plane": {
+      "name": "Plane",
+      "materials": [
+        "00_seafloor"
+      ],
+      "collections": [
+        "Seafloor"
+      ],
+      "class_id": 0,
+      "class_name": "seafloor",
+      "is_anomaly": false
+    },
+    "Rock0": {
+      "name": "Rock0",
+      "materials": [
+        "03_rock"
+      ],
+      "collections": [
+        "Rocks"
+      ],
+      "class_id": 2,
+      "class_name": "rock",
+      "is_anomaly": false
+    },
+    "Rock3": {
+      "name": "Rock3",
+      "materials": [
+        "03_rock"
+      ],
+      "collections": [
+        "Rocks"
+      ],
+      "class_id": 2,
+      "class_name": "rock",
+      "is_anomaly": false
+    },
+    "Rock6": {
+      "name": "Rock6",
+      "materials": [
+        "03_rock"
+      ],
+      "collections": [
+        "Rocks"
+      ],
+      "class_id": 2,
+      "class_name": "rock",
+      "is_anomaly": false
+    },
+    "SonarPath": {
+      "name": "SonarPath",
+      "materials": [
+        "SonarPathMaterial.001"
+      ],
+      "collections": [
+        "Collection 3"
+      ],
+      "class_id": 0,
+      "class_name": "seafloor",
+      "is_anomaly": false
+    },
+    "tekne": {
+      "name": "tekne",
+      "materials": [
+        "01_anomaly"
+      ],
+      "collections": [
+        "Anomalies"
+      ],
+      "class_id": 1,
+      "class_name": "anomaly",
+      "is_anomaly": true
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "0": {
+    "name": "seafloor",
+    "material": "00_seafloor",
+    "is_anomaly": false
+  },
+  "1": {
+    "name": "anomaly",
+    "material": "01_anomaly",
+    "is_anomaly": true
+  },
+  "2": {
+    "name": "coral",
+    "material": "02_coral",
+    "is_anomaly": false
+  },
+  "3": {
+    "name": "rock",
+    "material": "03_rock",
+    "is_anomaly": false
+  },
+  "4": {
+    "name": "wildlife",
+    "material": "04_wildlife",
+    "is_anomaly": false
+  },
+  "99": {
+    "name": "unknown",
+    "material": "99_unknown",
+    "is_anomaly": true
+  }
+}
