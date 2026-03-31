@@ -1,0 +1,61 @@
+import bpy
+
+"""
+Assign semantic materials for point cloud annotation
+Run this in base scene before procedural generation
+"""
+
+# Material mapping
+MATERIAL_ASSIGNMENTS = {
+    '00_seafloor': ['Plane', 'Mesh_0'],  # ✅ Unified seafloor material
+    '01_anomaly': ['Cube', 'Mball', 'tekne'],
+    '02_coral': ['10010_Coral_v1_L3'],
+    '03_rock': ['Rock0', 'Rock3', 'Rock6'],
+    '04_wildlife': ['10042_Sea_Turtle_V2_iterations-2'],
+}
+
+IGNORE_OBJECTS = ['Camera', 'Light', 'SonarPath', 'PathMarker']
+
+print("=" * 60)
+print("   ASSIGNING SEMANTIC MATERIALS")
+print("=" * 60)
+
+# Create materials if they don't exist
+for mat_name in MATERIAL_ASSIGNMENTS.keys():
+    if mat_name not in bpy.data.materials:
+        mat = bpy.data.materials.new(name=mat_name)
+        mat.use_nodes = True
+        
+        # Simple colored material for visualization
+        nodes = mat.node_tree.nodes
+        nodes.clear()
+        
+        bsdf = nodes.new('ShaderNodeBsdfPrincipled')
+        output = nodes.new('ShaderNodeOutputMaterial')
+        mat.node_tree.links.new(bsdf.outputs[0], output.inputs[0])
+        
+        print(f"  ✅ Created material: {mat_name}")
+
+# Assign materials to objects
+assigned = 0
+for mat_name, obj_prefixes in MATERIAL_ASSIGNMENTS.items():
+    mat = bpy.data.materials[mat_name]
+    
+    for obj in bpy.data.objects:
+        # Skip ignored objects
+        if any(ignore in obj.name for ignore in IGNORE_OBJECTS):
+            continue
+        
+        # Check if object matches any prefix
+        for prefix in obj_prefixes:
+            if obj.name.startswith(prefix):
+                # Clear existing materials
+                obj.data.materials.clear()
+                # Assign semantic material
+                obj.data.materials.append(mat)
+                assigned += 1
+                print(f"  ✅ {obj.name} → {mat_name}")
+                break
+
+print(f"\n✅ Assigned materials to {assigned} objects")
+print("\n💾 Save your base scene now!")
