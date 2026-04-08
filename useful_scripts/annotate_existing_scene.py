@@ -23,27 +23,22 @@ import bpy
 # CONFIGURATION - MODIFY THIS FOR YOUR SCENE
 # =============================================================================
 
-# Map collection names to class labels
-# Format: "Collection Name": ("class_label", is_anomaly_flag)
+# Map collection names to class labels/class IDs
+# Format: "Collection Name": ("class_label", class_id, is_anomaly_flag)
 #
 # is_anomaly_flag: 
 #   True = This is something you want to detect (anomaly, target, etc.)
 #   False = This is background/normal terrain
 
 COLLECTION_TO_CLASS = {
-    # Anomaly classes (things you want to detect)
-    "Anomalies": ("anomaly", True),
-    "Mines": ("mine", True),
-    "Debris": ("debris", True),
-    "Targets": ("target", True),
-    
-    # Background classes (normal seabed features)
-    "Rocks": ("rock", False),
-    "Seabed": ("background", False),
-    "Terrain": ("background", False),
-    "Sand": ("background", False),
-    
-    # Add more mappings as needed for your scene...
+    "seafloor": ("seafloor", 0, False),
+    "cube_anomaly": ("cube_anomaly", 1, True),
+    "sphere_anomaly": ("sphere_anomaly", 2, True),
+    "boat_anomaly": ("boat_anomaly", 3, True),
+    "coral": ("coral", 4, False),
+    "rock": ("rock", 5, False),
+    "wildlife": ("wildlife", 6, False),
+    "other": ("unknown", 99, False),
 }
 
 # Collections to skip (won't be annotated)
@@ -53,9 +48,10 @@ SKIP_COLLECTIONS = [
     "Lights",
     "Empties",
 ]
+SKIP_COLLECTIONS_LOWER = {name.lower() for name in SKIP_COLLECTIONS}
 
 # Default label for objects in unmapped collections
-DEFAULT_CLASS = ("unknown", False)
+DEFAULT_CLASS = ("unknown", 99, False)
 
 # =============================================================================
 # ANNOTATION FUNCTIONS
@@ -78,7 +74,7 @@ def get_object_collections(obj):
     return collections
 
 
-def annotate_object(obj, class_label, is_anomaly):
+def annotate_object(obj, class_label, class_id, is_anomaly):
     """
     Add annotation custom properties to an object.
     
@@ -91,18 +87,7 @@ def annotate_object(obj, class_label, is_anomaly):
     obj["class_label"] = class_label
     obj["is_anomaly"] = is_anomaly
     
-    # Optional: Add numeric class ID for easier processing
-    # You can customize this mapping
-    class_id_map = {
-        "background": 0,
-        "anomaly": 1,
-        "mine": 2,
-        "debris": 3,
-        "rock": 4,
-        "target": 5,
-        "unknown": -1,
-    }
-    obj["class_id"] = class_id_map.get(class_label, -1)
+    obj["class_id"] = int(class_id)
 
 
 def annotate_scene():
@@ -136,23 +121,24 @@ def annotate_scene():
         obj_collections = get_object_collections(obj)
         
         # Skip if in a skip collection
-        if any(skip in obj_collections for skip in SKIP_COLLECTIONS):
+        if any(col.lower() in SKIP_COLLECTIONS_LOWER for col in obj_collections):
             print(f"[SKIP] {obj.name} (in skip collection)")
             stats['skipped'] += 1
             continue
         
         # Find the appropriate class label
-        class_label, is_anomaly = DEFAULT_CLASS
+        class_label, class_id, is_anomaly = DEFAULT_CLASS
         matched_collection = None
         
         for collection_name in obj_collections:
-            if collection_name in COLLECTION_TO_CLASS:
-                class_label, is_anomaly = COLLECTION_TO_CLASS[collection_name]
-                matched_collection = collection_name
+            key = collection_name.lower()
+            if key in COLLECTION_TO_CLASS:
+                class_label, class_id, is_anomaly = COLLECTION_TO_CLASS[key]
+                matched_collection = key
                 break
         
         # Annotate the object
-        annotate_object(obj, class_label, is_anomaly)
+        annotate_object(obj, class_label, class_id, is_anomaly)
         stats['annotated'] += 1
         
         # Update statistics
@@ -167,7 +153,10 @@ def annotate_scene():
         
         # Print annotation result
         anomaly_str = "ANOMALY" if is_anomaly else "NORMAL"
-        print(f"[{anomaly_str:7}] {obj.name:30} → class: '{class_label}' (from: {matched_collection or 'default'})")
+        print(
+            f"[{anomaly_str:7}] {obj.name:30} → class: '{class_label}' "
+            f"(id={class_id}, from: {matched_collection or 'default'})"
+        )
     
     # Print summary
     print("\n" + "=" * 70)
@@ -187,9 +176,9 @@ def annotate_scene():
     
     print("\n--- Objects by Collection ---")
     for collection, objects in sorted(stats['by_collection'].items()):
-        class_label, is_anomaly = COLLECTION_TO_CLASS.get(collection, DEFAULT_CLASS)
+        class_label, class_id, is_anomaly = COLLECTION_TO_CLASS.get(collection.lower(), DEFAULT_CLASS)
         anomaly_str = "ANOMALY" if is_anomaly else "NORMAL"
-        print(f"  '{collection}' → '{class_label}' [{anomaly_str}]: {len(objects)} objects")
+        print(f"  '{collection}' → '{class_label}' id={class_id} [{anomaly_str}]: {len(objects)} objects")
     
     print("\n" + "=" * 70)
     print("ANNOTATION COMPLETE")
@@ -237,15 +226,15 @@ def list_collections():
     
     for collection in bpy.data.collections:
         objects = [obj.name for obj in collection.objects if obj.type == 'MESH']
-        mapped = collection.name in COLLECTION_TO_CLASS
+        mapped = collection.name.lower() in COLLECTION_TO_CLASS
         status = "MAPPED" if mapped else "NOT MAPPED"
         
         print(f"\n[{status}] Collection: '{collection.name}'")
         print(f"  Mesh objects: {len(objects)}")
         
         if mapped:
-            class_label, is_anomaly = COLLECTION_TO_CLASS[collection.name]
-            print(f"  → class_label: '{class_label}', is_anomaly: {is_anomaly}")
+            class_label, class_id, is_anomaly = COLLECTION_TO_CLASS[collection.name.lower()]
+            print(f"  → class_label: '{class_label}', class_id: {class_id}, is_anomaly: {is_anomaly}")
         
         for obj_name in objects[:5]:
             print(f"    - {obj_name}")

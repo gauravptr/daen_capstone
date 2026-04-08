@@ -1,0 +1,21 @@
+What is happening in your current file:
+
+Unknown points are mostly from two sources:
+noise_values: 363,511 points
+Plane: 293,018 points
+Unknown points with object_name = unknown are 0.
+Sphere points are now class_id 2 only (1815 rows), so sphere labeling itself is working in this CSV.
+Why gray still appears on/around object surfaces:
+
+The script intentionally exports scanner noise as class_id 99 (unknown), see multi_angle_scanner.py:656 and multi_angle_scanner.py:664.
+It scans from 9 viewpoints and merges all points without dedup/consensus filtering, see position setup in multi_angle_scanner.py:268 and merge behavior in multi_angle_scanner.py:718.
+Because of that, unknown/noise points from other scans can spatially overlap near real object surfaces, making it look like gray points are “on” the sphere even when sphere-labeled points are correct.
+Why unknown is still very high:
+
+Plane is still mapped to class_id 99 in your current scene output (293k points).
+Noise points are huge by design from blAInder output (363k).
+Together those two categories already account for almost all unknowns.
+Bottom line:
+
+The sphere itself is no longer being classified as unknown.
+The gray you see is mostly overlapping unknown noise/background points from multi-view fusion, not sphere misclassification.
